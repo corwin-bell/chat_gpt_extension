@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/*global chrome*/
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import { Box, Button, Container, Grid, Paper, TextField } from "@mui/material";
 import AutorenewIcon from '@mui/icons-material/Autorenew';
@@ -10,13 +11,26 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [response, setResponse] = useState("");
 
-  // key can still be stolen if bundled code is inspected
-  // supposedly better to set up a proxy server
+  // key can still be stolen if bundle.js is inspected
+  // supposedly better to set up a proxy server, but adds complication for a chrome extension
+  // probably going to stick with just not publishing the app for now
   // https://www.smashingmagazine.com/2023/05/safest-way-hide-api-keys-react/
   const openai = new OpenAI({
     apiKey: process.env.REACT_APP_OPENAI_API_KEY,
     dangerouslyAllowBrowser: true,
   });
+
+  useEffect(() => {
+    try {
+      chrome.storage.local.get(null, function (data) {
+        if ("prompt" in data) {
+          setPrompt(data.prompt);
+        }
+      });
+    } catch (e) {
+      console.log("Error due to local state");
+    }
+  }, []);
 
   async function handleSubmit() {
     setIsLoading(true);
@@ -60,6 +74,7 @@ function App() {
               value={prompt}
               onChange={(e) => {
                 setPrompt(e.target.value);
+                chrome.storage.local.set({ prompt: e.target.value }); // saves state when pop-up closed
               }}
             />
             <Button
