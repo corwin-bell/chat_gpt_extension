@@ -129,8 +129,5 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-# openai test js files
-src/openai*
-
 # build files
 build/

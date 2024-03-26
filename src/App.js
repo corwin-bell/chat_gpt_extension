@@ -14,7 +14,6 @@ function App() {
   // key can still be stolen if bundle.js is inspected
   // supposedly better to set up a proxy server, but adds complication for a chrome extension
   // probably going to stick with just not publishing the app for now
-  // https://www.smashingmagazine.com/2023/05/safest-way-hide-api-keys-react/
   const openai = new OpenAI({
     apiKey: process.env.REACT_APP_OPENAI_API_KEY,
     dangerouslyAllowBrowser: true,
