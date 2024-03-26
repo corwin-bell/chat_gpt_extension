@@ -1,12 +1,6 @@
-# Fallacy Finder
-#### Video Demo: <URL HERE>
-#### Description:
-Fallacy Finder is a Google Chrome extension that identifies and describes logical fallacies found in the content of the currently open tab.
+# ChatGPT Google Chrome Extension
+This project is a simple [React app](https://github.com/facebook/create-react-app) that leverages the [OpenAI API](https://platform.openai.com/docs/overview) and loads the build folder as a [Google Chrome Extension](https://developer.chrome.com/docs/extensions/get-started). The setup is largely based on the guidance provided in this [article](https://norahsakal.com/blog/create-gpt3-chrome-extension/). I had to make some updates to make sure the OpenAI API syntax matches the latest documentation and API key management was secure-ish. The idea is this project sets a foundation for other web apps and broswer tools I may build using the OpenAI API.
 
-Key TODOs:
-- add ability to read text from current tab
-- provide text as OpenAI prompts
-- render the response in helpful way on extension html page
 ## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
