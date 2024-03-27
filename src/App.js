@@ -39,7 +39,8 @@ function App() {
         messages: [
           { 
               role: "system", 
-              content: "You are a helpful assistant." 
+              content: "Create a JSON object of the form {fallacyType:{sentence: '', whyFallacy: ''}} for each logical fallacy found in user provided text including fallacy type, specific sentence containing fallacy, and why it is a fallacy.", 
+              // content: "You are a helpful assistant.",
           },
           { 
               role: "user",
@@ -57,6 +58,9 @@ function App() {
       setIsLoading(false);
     }
   }
+  
+  console.log(response);
+
   return (
     <Container>
       <Box sx={{ width: "100%", mt: 4  }}>
@@ -73,7 +77,7 @@ function App() {
               value={prompt}
               onChange={(e) => {
                 setPrompt(e.target.value);
-                chrome.storage.local.set({ prompt: e.target.value }); // saves state when pop-up closed
+                // chrome.storage.local.set({ prompt: e.target.value }); // saves state when pop-up closed
               }}
             />
             <Button
