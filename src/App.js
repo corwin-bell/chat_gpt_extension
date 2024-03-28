@@ -6,6 +6,7 @@ import AutorenewIcon from '@mui/icons-material/Autorenew';
 import { OpenAI } from "openai";
 
 
+
 function App() {
   const [prompt, setPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -40,7 +41,6 @@ function App() {
           { 
               role: "system", 
               content: "Create a JSON object of the form {fallacyType:'', sentence: '', whyFallacy: ''} for each logical fallacy found in user provided text including fallacy type, specific sentence containing fallacy, and why it is a fallacy.", 
-              // content: "You are a helpful assistant.",
           },
           { 
               role: "user",
@@ -64,7 +64,13 @@ function App() {
   const responseObj = JSON.parse(response);
   console.log(responseObj);
   const responseItems = responseObj.map((item) => (
-    <li key={item.id}>{item.fallacyType}</li>
+    <li key={item.id}>
+      {item.fallacyType}
+      <ul>
+        <li>Sentence: {item.sentence}</li>
+        <li>Why Fallacy: {item.whyFallacy}</li>
+      </ul>
+    </li>
   ));
 
   return (
@@ -114,12 +120,13 @@ function App() {
             </Button>
           </Grid>
           <Grid item xs={12} sx={{mt:3}}>
-            <Paper sx={{p:3}}>{response}</Paper>
             <ul>
+              <li> Fallacy Count: {responseItems.length}</li>
               {responseItems}
             </ul>
           </Grid>
         </Grid>
+
       </Box>
     </Container>
   );
