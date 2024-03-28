@@ -39,7 +39,7 @@ function App() {
         messages: [
           { 
               role: "system", 
-              content: "Create a JSON object of the form {fallacyType:{sentence: '', whyFallacy: ''}} for each logical fallacy found in user provided text including fallacy type, specific sentence containing fallacy, and why it is a fallacy.", 
+              content: "Create a JSON object of the form {fallacyType:'', sentence: '', whyFallacy: ''} for each logical fallacy found in user provided text including fallacy type, specific sentence containing fallacy, and why it is a fallacy.", 
               // content: "You are a helpful assistant.",
           },
           { 
@@ -60,6 +60,12 @@ function App() {
   }
   
   console.log(response);
+  // need to convert the response string into an array of JSON
+  const responseObj = JSON.parse(response);
+  console.log(responseObj);
+  const responseItems = responseObj.map((item) => (
+    <li key={item.id}>{item.fallacyType}</li>
+  ));
 
   return (
     <Container>
@@ -109,6 +115,9 @@ function App() {
           </Grid>
           <Grid item xs={12} sx={{mt:3}}>
             <Paper sx={{p:3}}>{response}</Paper>
+            <ul>
+              {responseItems}
+            </ul>
           </Grid>
         </Grid>
       </Box>
