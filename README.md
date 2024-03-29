@@ -5,7 +5,6 @@ FallacyFinder is a Google Chrome extension that identifies and describes logical
 
 I built FallacyFinder because the internet has a lot of opinionated content and it can be mentally taxing to examine a text critically and identify logical fallacies. The hope is that this tool can facilitate critical examination of opinionated text and set a foundation for additional features in the spirit of maintaining high-quality and reasonable discourse on the internet.
 
-- what each of the files you wrote for the project contains and does
 ### Functional explanation of key files
 As a React application, many auxilary files are created that are not critical to understanding the functioning of the application. I will focus my description on the following files
 - `manifest.json`
@@ -39,17 +38,18 @@ The `.env` file stores the API Key read by the `OpenAI()` function. This keeps t
 #### version control file management (.gitignore)
 The `.gitignore` file includes folders and files to ignore for version control. This keeps extraneous files (e.g. `node_modules`) and sensitive information (e.g. the API key) from being exposed in the publicly visible git repository that stores this project.
 
-- you debated certain design choices, explaining why you made them.
+## Design Challenges/Choices
+One of the surprisingly most challenging aspects of this project was getting the OpenAI API to work within a chrome extension. 
 
-
-## Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## OpenAI API syntax for node.js
-
-This project follows the [OpenAI API Quickstart guide for Node.js](https://platform.openai.com/docs/quickstart?context=node). The syntax and model choices evolve pretty quickly so it is likely that this will need to be updated for future iterations of this project.
-
-## API key management for a React project
+### API key management for a React project
 I followed the guidance provided in this [article](https://www.smashingmagazine.com/2023/05/safest-way-hide-api-keys-react/), storing the OpenAI provided key in a `.env` file with the prefix `REACT_APP_`, and adding the `.env` file to the `.gitignore`. This keeps the API Key from being exposed in your remote git repo. That said, this does not hide the key from the `bundle.js` or other `build/` files that are sent to the client. Thus, this solution is not safe for publishing the `build/` directory as a Google Chrome Extension.
+
+### OpenAI API syntax for node.js
+This project follows the [OpenAI API Quickstart guide for Node.js](https://platform.openai.com/docs/quickstart?context=node). The syntax and model choices evolve pretty quickly so it is likely that this will need to be updated for future iterations of this project. Initially, the responses were inconsistent strings of formatted text that were hard to return to the UI in a programmatic and user-friendly way. It took a lot of "prompt engineering" to get reasonably consistent responses that I could parse as JSON.
+
+### Using React as the basis for the application
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). I debated whether to use a simpler HTML, CSS, JS approach or React. I landed on React because I have heard it is the industry standard for building web applications and because I found a good [example](https://norahsakal.com/blog/create-gpt3-chrome-extension/) of a chrome extension built using React and the MUI library. In hindsight, this may have overcomplicated the project for the level of simplicity I was seeking, but it does set the stage for nicer dynamic development on top of what I currently have. 
+
+
+
 
