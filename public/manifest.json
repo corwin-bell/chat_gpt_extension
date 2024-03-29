@@ -1,24 +1,16 @@
 {
   "manifest_version": 3,
-  "name": "Chat GPT Extension",
-  "description": "Basic Chat GPT extension using my OpenAI API.",
+  "name": "FallacyFinder",
+  "description": "Logical fallacy finder using OpenAI API.",
   "version": "1.0.0",
   "action": {
       "default_popup": "index.html",
-      "default_title": "Open the popup",
+      "default_title": "FallacyFinder",
       "default_icon": "icon.png"
   },
   "icons": {
       "16": "icon.png",
       "48": "icon.png",
       "128": "icon.png"
-  },
-  "permissions": [
-      "scripting",
-      "activeTab",
-      "storage"
-  ],
-  "host_permissions": [
-      "https://*/"
-  ]
+  }
 }
