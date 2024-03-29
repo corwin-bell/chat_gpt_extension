@@ -15,7 +15,29 @@ As a React application, many auxilary files are created that are not critical to
 - `.env`
 - `.gitignore`
 
-#### manifest.json
+#### Extension Configuration File (manifest.json)
+todo: remove unnecessary permissions?
+The `manifest.json` configuration file is required for Google Chome to load an extension. it gives important metadata about the extension name, version, actions it performs, icons used, and any permissions given to the extension. In the case of FallacyFinder, the configuration is pretty basic since it does not directly read data or manipulate the document object model (DOM) of open tabs.
+
+#### Extension webpage (index.html)
+The `index.html` file gets created programmatically when the React project gets created. All of the `index.html` webpage components get created programmatically using the `index.js` and `App.js` files and inserted inside `<div id="root"></div>`.
+
+#### Rendering script (index.js)
+The `index.js` script accesses the `<div id="root"></div>` in `index.html` and renders result of the application logic returned by `App.js`.
+
+#### Application logic script (App.js)
+The `App.js` script does the heavy lifting for the FallacyFinder Extension by doing the following:
+- imports useful pre-built user interface (UI) components from the [Material UI library](https://mui.com/)
+- create a new OpenAI API instance using my API key in the `new OpenAI()` function
+- stores user input as a prompt for the OpenAI API call with the `setprompt()` function
+- submits prompt to OpenAI API and stores response with the `handleSumbit()` function
+- then converts the response into a more user-friendly components to be sent to the UI
+
+#### Secrets storage (.env)
+The `.env` file stores the API Key read by the `OpenAI()` function. This keeps the API Key hidden from the codebase but visible to the bundled code used by the client. 
+
+#### version control file management (.gitignore)
+The `.gitignore` file includes folders and files to ignore for version control. This keeps extraneous files (e.g. `node_modules`) and sensitive information (e.g. the API key) from being exposed in the publicly visible git repository that stores this project.
 
 - you debated certain design choices, explaining why you made them.
 
