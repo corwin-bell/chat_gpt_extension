@@ -53,25 +53,42 @@ function App() {
       setResponse(completion.choices[0].message.content);
       setIsLoading(false);
     } 
-    catch (e) {
-      alert("Error: ", e);
+    catch (error) {
+      alert("Error: ", error);
       setIsLoading(false);
     }
   }
   
   console.log(response);
   // need to convert the response string into an array of JSON
-  const responseObj = JSON.parse(response);
-  console.log(responseObj);
-  const responseItems = responseObj.map((item) => (
-    <li key={item.id}>
-      {item.fallacyType}
-      <ul>
-        <li>Sentence: {item.sentence}</li>
-        <li>Why Fallacy: {item.whyFallacy}</li>
-      </ul>
-    </li>
-  ));
+  // add a try catch clause to handle empty JSON
+  let fallacyObj = [];
+  let fallacyCount = 0;
+  let fallacyList = <li></li>;
+  try {
+    fallacyObj = JSON.parse(response);
+    console.log(fallacyObj);
+    fallacyCount = fallacyObj.length;
+    if (fallacyCount == 0) {
+      fallacyList = <li>No Fallacies Found</li>;
+    }
+    else {
+      fallacyList = fallacyObj.map((item) => (
+        <li key={item.id}>
+          {item.fallacyType}
+          <ul>
+            <li>Sentence: {item.sentence}</li>
+            <li>Why Fallacy: {item.whyFallacy}</li>
+          </ul>
+        </li>
+      ));
+    }
+  }
+  catch (error) {
+    console.error("Error parsing JSON:", error);
+    fallacyList = <li>No Fallacies Found</li>;
+  }
+  
 
   return (
     <Container>
@@ -89,7 +106,7 @@ function App() {
               value={prompt}
               onChange={(e) => {
                 setPrompt(e.target.value);
-                // chrome.storage.local.set({ prompt: e.target.value }); // saves state when pop-up closed
+                chrome.storage.local.set({ prompt: e.target.value }); // saves state when pop-up closed
               }}
             />
             <Button
@@ -121,12 +138,11 @@ function App() {
           </Grid>
           <Grid item xs={12} sx={{mt:3}}>
             <ul>
-              <li> Fallacy Count: {responseItems.length}</li>
-              {responseItems}
+              <li> Fallacy Count: {fallacyCount}</li>
+              {fallacyList}
             </ul>
           </Grid>
         </Grid>
-
       </Box>
     </Container>
   );
