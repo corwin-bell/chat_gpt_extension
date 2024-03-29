@@ -1,8 +1,16 @@
 /*global chrome*/
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import { Box, Button, Container, Grid, Paper, TextField } from "@mui/material";
+import { Box, Button, Container, Grid, TextField } from "@mui/material";
 import AutorenewIcon from '@mui/icons-material/Autorenew';
+import Badge from '@mui/material/Badge';
+import DangerousIcon from '@mui/icons-material/Dangerous';
+import Accordion from '@mui/material/Accordion';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import Typography from '@mui/material/Typography';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+
 import { OpenAI } from "openai";
 
 
@@ -69,18 +77,35 @@ function App() {
     fallacyObj = JSON.parse(response);
     console.log(fallacyObj);
     fallacyCount = fallacyObj.length;
-    if (fallacyCount == 0) {
+    if (fallacyCount === 0) {
       fallacyList = <li>No Fallacies Found</li>;
     }
     else {
       fallacyList = fallacyObj.map((item) => (
-        <li key={item.id}>
-          {item.fallacyType}
-          <ul>
-            <li>Sentence: {item.sentence}</li>
-            <li>Why Fallacy: {item.whyFallacy}</li>
-          </ul>
-        </li>
+        // <li key={item.id}>
+        //   {item.fallacyType}
+        //   <ul>
+        //     <li>Sentence: {item.sentence}</li>
+        //     <li>Why Fallacy: {item.whyFallacy}</li>
+        //   </ul>
+        // </li>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ArrowDropDownIcon />}
+            aria-controls={item.id}
+            id={item.id}
+          >
+            <Typography>{item.fallacyType}</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+                <h4>Sentence containing fallacy</h4>
+                <p>{item.sentence}</p>
+                <h4>Why this is a fallacy</h4>
+                <p>{item.whyFallacy}</p>
+            </Typography>
+          </AccordionDetails>
+          </Accordion>
       ));
     }
   }
@@ -98,7 +123,7 @@ function App() {
             <TextField
               autoFocus
               fullWidth
-              label="Your text"
+              label="Enter text to evaluate for logical fallacies"
               variant="outlined"
               multiline
               rows={4}
@@ -133,14 +158,19 @@ function App() {
               )
             }
             >
-            Submit
+            Find Logical Fallacies
             </Button>
           </Grid>
           <Grid item xs={12} sx={{mt:3}}>
-            <ul>
-              <li> Fallacy Count: {fallacyCount}</li>
+            <Badge badgeContent={fallacyCount} color="primary">
+              <DangerousIcon color="action" />
+            </Badge>
+              {/* <ul>
+                {fallacyList}
+              </ul> */}
+            <div>
               {fallacyList}
-            </ul>
+            </div>
           </Grid>
         </Grid>
       </Box>
