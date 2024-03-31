@@ -1,5 +1,5 @@
 # Fallacy Finder
-## Video Demo: <URL HERE>
+## Video Demo: [YouTube Link](https://youtu.be/oK-Ahbx3b5Q)
 ## Description:
 FallacyFinder is a Google Chrome extension that identifies and describes logical fallacies in a given text. I built this extension using React, an open-source JavaScript library used to make dynamic single-page applications, and the OpenAI API for ChatGPT, an application programming interface that grants programmatic access to the models used in the popular Large Language Model (LLM). At a high level, FallacyFinder takes text as input, sends the text and specific guidance as a prompt to OpenAI, and renders the results to the extension in a user-friendly format. 
 
