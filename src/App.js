@@ -52,7 +52,7 @@ function App() {
         messages: [
           { 
               role: "system", 
-              content: "Create a JSON object of the form {fallacyType:'', sentence: '', whyFallacy: ''} for each logical fallacy found in user provided text including fallacy type, specific sentence containing fallacy, and why it is a fallacy.", 
+              content: "Create a JSON object of the form [{fallacyType:'', sentence: '', whyFallacy: ''}, {fallacyType:'', sentence: '', whyFallacy: ''}, etc.] for each logical fallacy found in user provided text including fallacy type, specific sentence containing fallacy, and why it is a fallacy.", 
           },
           { 
               role: "user",
