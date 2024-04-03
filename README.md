@@ -31,6 +31,8 @@ The `App.js` script does the heavy lifting for the FallacyFinder Extension by do
 - submits prompt to OpenAI API and stores response with the `handleSumbit()` function
 - then converts the response into a more user-friendly components to be sent to the UI
 
+The general approach for handling UI interactions and rendering is based on guidance from this [article](https://norahsakal.com/blog/create-gpt3-chrome-extension/)
+
 #### Secrets storage (.env)
 The `.env` file stores the API Key read by the `OpenAI()` function. This keeps the API Key hidden from the codebase but visible to the bundled code used by the client. 
 
