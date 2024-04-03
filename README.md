@@ -15,7 +15,7 @@ As a React application, many auxilary files are created that are not critical to
 - `.gitignore`
 
 #### Extension Configuration File (manifest.json)
-The `manifest.json` configuration file is required for Google Chome to load an extension. it gives important metadata about the extension name, version, actions it performs, icons used, and any permissions given to the extension. In the case of FallacyFinder, the configuration is pretty basic since it does not directly read data or manipulate the document object model (DOM) of open tabs.
+The `manifest.json` configuration file is required for Google Chrome to load an extension. it gives important metadata about the extension name, version, actions it performs, icons used, and any permissions given to the extension. In the case of FallacyFinder, the configuration is pretty basic since it does not directly read data or manipulate the document object model (DOM) of open tabs.
 
 #### Extension webpage (index.html)
 The `index.html` file gets created programmatically when the React project gets created. All of the `index.html` webpage components get created programmatically using the `index.js` and `App.js` files and inserted inside `<div id="root"></div>`.
